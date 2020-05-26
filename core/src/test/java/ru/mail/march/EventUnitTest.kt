@@ -37,7 +37,7 @@ class EventUnitTest {
 
         assertEquals("event", channelEvent.getValue())
 
-        verify(observer).onChanged("event")
+        verify(observer, times(1)).onChanged("event")
 
         channelEvent.postValue("event")
 
