@@ -23,10 +23,7 @@ class EventUnitTest {
     private val observer: Observer<String> = mock()
 
     @Test
-    /**
-     * гарантирует, что подписчик получит все события, не только уникальные
-     */
-    fun eventChannelTest1() {
+    fun `notify with all values (not a unique)`() {
         val channelEvent = getEventChannelForTest<String>()
 
         channelEvent.observe {
@@ -45,10 +42,7 @@ class EventUnitTest {
     }
 
     @Test
-    /**
-     * при подписке получатель будет оповещен последними непрочитанным из канала событием
-     */
-    fun eventChannelTest2() {
+    fun `observer will be notified with last event in channel`() {
         val channelEvent = getEventChannelForTest<String>()
 
         channelEvent.postValue("event")
@@ -62,10 +56,7 @@ class EventUnitTest {
 
 
     @Test
-    /**
-     * если событие было прочитано из канала, повторного оповещения не будет
-     */
-    fun eventChannelTest3() {
+    fun `observer will not be notified, if event already observed`() {
         val channelEvent = getEventChannelForTest<String>()
 
         channelEvent.postValue("event")

@@ -22,11 +22,8 @@ class StateChannelTests {
 
     private val observer: Observer<String> = mock()
 
-    /**
-     * подписчик получает данные только если они изменились (при создании канала можно задать правила сравнения, по умолчанию используется equals)
-     */
     @Test
-    fun stateChannelTest1() {
+    fun `notify observer only with unique values`() {
         val channelState = getStateChannelForTest<String>()
 
         channelState.observe {
@@ -45,10 +42,7 @@ class StateChannelTests {
     }
 
     @Test
-        /**
-         * при подписке получатель будет оповещен последними данными в канале
-         */
-    fun stateChannelTest2() {
+    fun `observer will be notified with last state in channel`() {
         val channelState = getStateChannelForTest<String>()
 
         channelState.postValue("state")
@@ -62,10 +56,7 @@ class StateChannelTests {
 
 
     @Test
-    /**
-     * гарантирует, что последнее отправленное значение дойдёт до подписчика
-     */
-    fun stateChannelTest3() {
+    fun `observer will be notified, if state already observed`() {
         val channelState = getStateChannelForTest<String>()
 
         channelState.postValue("state")
