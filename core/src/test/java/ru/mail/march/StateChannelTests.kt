@@ -32,8 +32,6 @@ class StateChannelTests {
 
         channelState.postValue("state")
 
-        Assert.assertEquals("state", channelState.getValue())
-
         verify(observer, times(1)).onChanged("state")
 
         channelState.postValue("state")
@@ -60,8 +58,6 @@ class StateChannelTests {
         val channelState = getStateChannelForTest<String>()
 
         channelState.postValue("state")
-
-        Assert.assertEquals("state", channelState.getValue())
 
         channelState.observe {
             observer.onChanged(it)

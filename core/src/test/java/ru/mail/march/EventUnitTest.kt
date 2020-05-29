@@ -32,8 +32,6 @@ class EventUnitTest {
 
         channelEvent.postValue("event")
 
-        assertEquals("event", channelEvent.getValue())
-
         verify(observer, times(1)).onChanged("event")
 
         channelEvent.postValue("event")
@@ -60,8 +58,6 @@ class EventUnitTest {
         val channelEvent = getEventChannelForTest<String>()
 
         channelEvent.postValue("event")
-
-        assertEquals("event", channelEvent.getValue())
 
         channelEvent.observe {
             observer.onChanged(it)
