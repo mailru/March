@@ -5,7 +5,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import ru.mail.march.interactor.impl.InteractorObtainers
+import ru.mail.march.interactor.InteractorObtainers
 
 class MainActivity : AppCompatActivity(), Presenter.View {
     private var timeTextView: TextView? = null
