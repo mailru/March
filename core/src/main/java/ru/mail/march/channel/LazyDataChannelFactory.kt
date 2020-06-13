@@ -1,7 +1,7 @@
 package ru.mail.march.channel
 
 class LazyDataChannelFactory : DataChannelFactory {
-    private val channels = ArrayList<Initializer<*>>()
+    private val channels = ArrayList<LazyDataChannel<*>>()
 
     override fun <T> createStateChannel(comparator: StateComparator<T>): DataChannel<T> {
         val element = StateChannel(comparator)
@@ -17,7 +17,7 @@ class LazyDataChannelFactory : DataChannelFactory {
 
     fun attachChannelFactory(factory: DataChannelFactory) {
         channels.forEach {
-            it.init(factory)
+            it.attachFactory(factory)
         }
     }
 }
