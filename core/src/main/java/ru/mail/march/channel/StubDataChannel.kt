@@ -1,6 +1,6 @@
 package ru.mail.march.channel
 
-internal class DataChannelStub<T> : DataChannel<T> {
+internal class StubDataChannel<T> : DataChannel<T> {
     override fun postValue(value: T) {
         throw IllegalAccessException()
     }

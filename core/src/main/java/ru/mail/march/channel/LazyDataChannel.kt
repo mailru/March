@@ -1,7 +1,7 @@
 package ru.mail.march.channel
 
-internal open class DataChannelWrapper<T> : DataChannel<T> {
-    var channel: DataChannel<T> = DataChannelStub()
+internal abstract class LazyDataChannel<T> : DataChannel<T> {
+    var channel: DataChannel<T> = StubDataChannel()
 
     override fun postValue(value: T) {
         channel.postValue(value)
@@ -18,4 +18,6 @@ internal open class DataChannelWrapper<T> : DataChannel<T> {
     override fun getValue(): T? {
         return channel.getValue()
     }
+
+    abstract fun attachFactory(factory: DataChannelFactory)
 }

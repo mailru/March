@@ -10,7 +10,7 @@ class LazyDataChannelFactory : DataChannelFactory {
     }
 
     override fun <T> createEventChannel(): DataChannel<T> {
-        val element = EventChannel<T>()
+        val element = LazyEventChannel<T>()
         channels.add(element)
         return element
     }
