@@ -4,7 +4,7 @@ import ru.mail.march.channel.DataChannelFactory
 import ru.mail.march.channel.LazyDataChannelFactory
 
 abstract class Interactor {
-    private val channelFactory = LazyDataChannelFactory()
+    val channelFactory = LazyDataChannelFactory()
 
     open fun create() {}
     open fun destroy() {}
