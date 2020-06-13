@@ -1,6 +1,6 @@
 package ru.mail.march.channel
 
-internal class LazyDataChannelFactory : DataChannelFactory {
+class LazyDataChannelFactory : DataChannelFactory {
     private val channels = ArrayList<Initializer<*>>()
 
     override fun <T> createStateChannel(comparator: StateComparator<T>): DataChannel<T> {
