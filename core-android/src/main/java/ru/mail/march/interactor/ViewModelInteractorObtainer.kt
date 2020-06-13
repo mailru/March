@@ -10,7 +10,7 @@ class ViewModelInteractorObtainer(
     private val lifecycleOwner: LifecycleOwner
 ) : InteractorObtainer {
 
-    override fun <T : Interactor> obtain(clazz: Class<T>, creator: (DataChannelFactory) -> T): T {
+    override fun <T : Interactor> obtain(clazz: Class<T>, creator: () -> T): T {
         return obtain(clazz,
             DEFAULT_KEY, creator)
     }
@@ -18,7 +18,7 @@ class ViewModelInteractorObtainer(
     override fun <T : Interactor> obtain(
         clazz: Class<T>,
         key: String,
-        creator: (DataChannelFactory) -> T
+        creator: () -> T
     ): T {
         val provider = ViewModelProvider(viewModelStore,
             InteractorViewModelFactory(creator)

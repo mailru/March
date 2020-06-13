@@ -1,8 +1,7 @@
 package ru.mail.march.interactor
 
-import ru.mail.march.channel.DataChannelFactory
 
-typealias InteractorCreator<T> = (channelFactory: DataChannelFactory) -> T
+typealias InteractorCreator<T> = () -> T
 
 interface InteractorObtainer {
     fun <T : Interactor> obtain(clazz: Class<T>, creator: InteractorCreator<T>): T
