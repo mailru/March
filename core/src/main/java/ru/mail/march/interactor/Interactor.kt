@@ -1,9 +1,10 @@
 package ru.mail.march.interactor
 
-import ru.mail.march.channel.*
+import ru.mail.march.channel.DataChannelFactory
+import ru.mail.march.channel.LazyDataChannelFactory
 
 abstract class Interactor {
-    val channelFactory = DataChannelFactoryWrapper()
+    val channelFactory = LazyDataChannelFactory()
 
     open fun create() {}
     open fun destroy() {}
