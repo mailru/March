@@ -1,0 +1,26 @@
+ext {
+    bintrayRepo = 'march'
+    bintrayName = POM_BINTRAY_NAME
+
+    publishedGroupId = 'ru.mail.march'
+    libraryName = 'march'
+    artifact = POM_ARTIFACT_ID
+    packagingType = POM_PACKAGING
+
+    libraryDescription = POM_DESCRIPTION
+
+    siteUrl = 'https://github.com/mailru/March'
+    gitUrl = 'https://github.com/mailru/March.git'
+
+    libraryVersion = POM_VERSION
+
+    developerId = 'Mail.ru Group'
+    developerName = 'Mail.ru Group'
+
+    licenseName = 'MIT'
+    licenseUrl = 'http://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
+
+apply from: rootProject.file('jcenter/maven-install.gradle')
+apply from: rootProject.file('jcenter/bintray.gradle')
