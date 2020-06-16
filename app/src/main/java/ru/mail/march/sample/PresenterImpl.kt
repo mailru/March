@@ -4,7 +4,7 @@ import ru.mail.march.interactor.InteractorObtainer
 
 class PresenterImpl(view: Presenter.View, interactorObtainer: InteractorObtainer): Presenter {
     private val interactor = interactorObtainer.obtain(SampleInteractor::class.java) {
-        SampleInteractor(it)
+        SampleInteractor()
     }
 
     init {

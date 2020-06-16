@@ -1,8 +1,10 @@
-package ru.mail.march.channel
+package ru.mail.march
 
 import androidx.lifecycle.LifecycleOwner
+import ru.mail.march.channel.*
 
-class TestDataChannelFactory(private val owner: LifecycleOwner) : DataChannelFactory {
+class TestDataChannelFactory(private val owner: LifecycleOwner) :
+    DataChannelFactory {
 
     private val channels = ArrayList<LiveDataChannel<*>>()
 
