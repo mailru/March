@@ -1,4 +1,4 @@
-package ru.mail.march
+package ru.mail.march.channel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Lifecycle
@@ -11,10 +11,8 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Rule
 import org.junit.Test
-import ru.mail.march.channel.DataChannel
-import ru.mail.march.channel.LiveDataChannelFactory
 
-class EventUnitTest {
+class StateChannelTests {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -22,66 +20,67 @@ class EventUnitTest {
     private val observer: Observer<String> = mock()
 
     @Test
-    fun `notify with all values (not a unique)`() {
-        val channelEvent = getEventChannelForTest<String>()
+    fun `notify observer only with unique values`() {
+        val channelState = getStateChannelForTest<String>()
 
-        channelEvent.observe {
+        channelState.observe {
             observer.onChanged(it)
         }
 
-        channelEvent.postValue("event")
+        channelState.postValue("state")
 
-        verify(observer, times(1)).onChanged("event")
+        verify(observer, times(1)).onChanged("state")
 
-        channelEvent.postValue("event")
+        channelState.postValue("state")
 
-        verify(observer, times(2)).onChanged("event")
+        verify(observer, times(1)).onChanged("state")
     }
 
     @Test
-    fun `observer will be notified with last event in channel`() {
-        val channelEvent = getEventChannelForTest<String>()
+    fun `observer will be notified with last state in channel`() {
+        val channelState = getStateChannelForTest<String>()
 
-        channelEvent.postValue("event")
+        channelState.postValue("state")
 
-        channelEvent.observe {
+        channelState.observe {
             observer.onChanged(it)
         }
 
-        verify(observer).onChanged("event")
+        verify(observer).onChanged("state")
     }
 
 
     @Test
-    fun `observer will not be notified, if event already observed`() {
-        val channelEvent = getEventChannelForTest<String>()
+    fun `observer will be notified, if state already observed`() {
+        val channelState = getStateChannelForTest<String>()
 
-        channelEvent.postValue("event")
+        channelState.postValue("state")
 
-        channelEvent.observe {
+        channelState.observe {
             observer.onChanged(it)
         }
 
         val mockObserver: Observer<String> = mock()
-        channelEvent.observe {
+        channelState.observe {
             mockObserver.onChanged(it)
         }
 
-        verify(mockObserver, times(0)).onChanged("event")
+        verify(mockObserver, times(1)).onChanged("state")
     }
 
-    private fun <T> getEventChannelForTest(): DataChannel<T> {
+    private fun <T> getStateChannelForTest(): DataChannel<T> {
+        
         val owner = mock<LifecycleOwner>()
 
         val lifecycleRegistry = LifecycleRegistry(owner)
         whenever(owner.lifecycle).thenReturn(lifecycleRegistry)
 
         val channelFactory = LiveDataChannelFactory()
-        val channelEvent = channelFactory.createEventChannel<T>()
+        val channelState = channelFactory.createStateChannel<T>()
 
         channelFactory.attachOwner(owner)
 
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-        return channelEvent
+        return channelState
     }
 }
