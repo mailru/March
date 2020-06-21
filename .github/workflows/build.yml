@@ -50,9 +50,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Core Android unit tests
-        path: /core-android/build/reports/tests/testDebugUnitTest/index.html
-    - name: Unit core android results
-      uses: actions/upload-artifact@v1
-      with:
-        name: Core unit tests
-        path: /core/build/reports/tests/testDebugUnitTest/index.html
+        path: core-android/build/reports/tests/testDebugUnitTest/index.html
