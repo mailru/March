@@ -58,3 +58,29 @@ Usage:
  * inside lambda create a new instance of interactor through constructor
  * instance of your interactor will be created only *once* when user will be on feature screen, and will be *reused* on all configuration changes
  * lambda creator gets implementation of *DataChannelFactory* for creating a new *DataChannel* inside your interactor
+
+ ## Integration
+
+ This library is available on **jcenter**, so you need to add this repository to your root build.gradle:
+
+ ```groovy
+ allprojects {
+     repositories {
+         ...
+         jcenter()
+     }
+ }
+ ```
+
+ Add one of the following dependency:
+
+ ```groovy
+ dependencies {
+
+     //core for java modules
+     implementation 'ru.mail.march:core:0.0.1-alpha'
+
+     //core-android for android modules
+     implementation 'ru.mail.march:core-android:0.0.1-alpha'
+ }
+ ```
