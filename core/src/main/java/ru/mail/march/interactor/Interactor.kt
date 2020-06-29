@@ -1,11 +1,8 @@
 package ru.mail.march.interactor
 
-import ru.mail.march.channel.DataChannel
-import ru.mail.march.channel.DataChannelFactory
-import ru.mail.march.channel.LazyDataChannelFactory
-import ru.mail.march.channel.StateComparator
+import ru.mail.march.channel.*
 
-abstract class Interactor : DataChannelFactory {
+abstract class Interactor {
     private val channelFactory = LazyDataChannelFactory()
 
     open fun create() {}
@@ -15,11 +12,11 @@ abstract class Interactor : DataChannelFactory {
         channelFactory.attachChannelFactory(factory)
     }
 
-    override fun <T> createStateChannel(comparator: StateComparator<T>): DataChannel<T> {
+    fun <T> stateChannel(comparator: StateComparator<T> = SimpleStateComparator()): DataChannel<T> {
         return channelFactory.createStateChannel(comparator)
     }
 
-    override fun <T> createEventChannel(): DataChannel<T> {
+    fun <T> eventChannel(): DataChannel<T> {
         return channelFactory.createEventChannel()
     }
 }

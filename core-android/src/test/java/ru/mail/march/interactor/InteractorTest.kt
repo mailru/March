@@ -38,6 +38,6 @@ class InteractorTest {
 }
 
 class SampleInteractor : TestInteractor() {
-    val eventDataChannel = createEventChannel<String>()
-    val stateDataChannel = createEventChannel<Int>()
+    val eventDataChannel = eventChannel<String>()
+    val stateDataChannel = eventChannel<Int>()
 }
