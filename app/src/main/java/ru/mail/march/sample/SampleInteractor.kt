@@ -3,9 +3,9 @@ package ru.mail.march.sample
 import ru.mail.march.interactor.Interactor
 
 class SampleInteractor : Interactor(), Timer.Observer {
-    val errorChannel = channelFactory.createEventChannel<String>()
-    val timeChannel = channelFactory.createStateChannel<Int>()
-    val wordChannel = channelFactory.createStateChannel<String>()
+    val errorChannel = eventChannel<String>()
+    val timeChannel = stateChannel<Int>()
+    val wordChannel = stateChannel<String>()
 
     override fun create() {
         Timer.registerObserve(this)
