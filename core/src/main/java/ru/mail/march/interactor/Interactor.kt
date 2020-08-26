@@ -26,12 +26,4 @@ abstract class Interactor {
     fun <T> eventChannel(): DataChannel<T> {
         return channelFactory.createEventChannel()
     }
-
-    fun execute(block: suspend CoroutineScope.() -> Unit) {
-        interactorScope.launch {
-            withContext(Dispatchers.IO) {
-                block.invoke(this)
-            }
-        }
-    }
 }
