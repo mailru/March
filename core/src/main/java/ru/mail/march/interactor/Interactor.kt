@@ -1,9 +1,16 @@
 package ru.mail.march.interactor
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.mail.march.channel.*
+import kotlin.coroutines.EmptyCoroutineContext
 
 abstract class Interactor {
     private val channelFactory = LazyDataChannelFactory()
+
+    var interactorScope = CoroutineScope(EmptyCoroutineContext)
 
     open fun create() {}
     open fun destroy() {}
