@@ -78,9 +78,9 @@ Usage:
  dependencies {
 
      //core for java modules
-     implementation 'ru.mail.march:core:0.0.1-alpha'
+     implementation 'ru.mail.march:core:0.0.2-alpha'
 
      //core-android for android modules
-     implementation 'ru.mail.march:core-android:0.0.1-alpha'
+     implementation 'ru.mail.march:core-android:0.0.2-alpha'
  }
  ```
