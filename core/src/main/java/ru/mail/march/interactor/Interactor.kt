@@ -1,9 +1,6 @@
 package ru.mail.march.interactor
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import ru.mail.march.channel.*
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -25,5 +22,13 @@ abstract class Interactor {
 
     fun <T> eventChannel(): DataChannel<T> {
         return channelFactory.createEventChannel()
+    }
+
+    fun execute(dispatcher: CoroutineDispatcher = Dispatchers.IO, block: suspend CoroutineScope.() -> Unit): Job {
+        return interactorScope.launch {
+            withContext(dispatcher) {
+                block.invoke(this)
+            }
+        }
     }
 }
