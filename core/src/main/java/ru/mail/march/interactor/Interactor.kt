@@ -24,8 +24,8 @@ abstract class Interactor {
         return channelFactory.createEventChannel()
     }
 
-    fun execute(dispatcher: CoroutineDispatcher = Dispatchers.IO, block: suspend CoroutineScope.() -> Unit) {
-        interactorScope.launch {
+    fun execute(dispatcher: CoroutineDispatcher = Dispatchers.IO, block: suspend CoroutineScope.() -> Unit): Job {
+        return interactorScope.launch {
             withContext(dispatcher) {
                 block.invoke(this)
             }
