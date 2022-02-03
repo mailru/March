@@ -10,8 +10,8 @@ class InteractorViewModel<I : Interactor>(
 ) : ViewModel() {
 
     init {
-        interactor.create()
         interactor.interactorScope = viewModelScope
+        interactor.create()
     }
 
     override fun onCleared() {
